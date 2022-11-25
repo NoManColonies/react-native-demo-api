@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package test_message;
+
+service TestMessageService {
+  rpc SendMessage(TestMessage) returns (ResponseMessage) {}
+  rpc StreamMessage(stream TestMessage) returns (ResponseMessage) {}
+  rpc EventMessage(EventConfigRequest) returns (stream ResponseMessage) {}
+  rpc ChatMessage(stream TestMessage) returns (stream ResponseMessage) {}
+}
+
+message TestMessage {
+  string content = 1;
+}
+
+message ResponseMessage {
+  string content = 1;
+}
+
+message EventConfigRequest {
+  int32 count = 1;
+  int32 delay = 2;
+}
